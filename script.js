@@ -1,13 +1,13 @@
-// Get the user's name
-const userName = prompt("Please enter your name:");
-const welcomeMessage = document.createElement("span");
-welcomeMessage.textContent = `Hi ${userName}, here are your transactions`;
-welcomeMessage.classList.add("username");
+// // Get the user's name
+// const userName = prompt("Please enter your name:");
+// const welcomeMessage = document.createElement("span");
+// welcomeMessage.textContent = `Hi ${userName}, here are your transactions`;
+// welcomeMessage.classList.add("username");
 
-// Display the welcome message
-const welcomeMessageElement = document.getElementById("welcome-message");
-welcomeMessageElement.innerHTML = "";
-welcomeMessageElement.appendChild(welcomeMessage);
+// // Display the welcome message
+// const welcomeMessageElement = document.getElementById("welcome-message");
+// welcomeMessageElement.innerHTML = "";
+// welcomeMessageElement.appendChild(welcomeMessage);
 
 // Form submission event listener
 const form = document.getElementById("transaction-form");
@@ -17,7 +17,6 @@ form.addEventListener("submit", addTransaction);
 let descriptionChart;
 let dailyTransactionChart;
 let incomeDeductionChart;
-let incomeDeductionLineChart;
 
 // Function to handle form submission
 function addTransaction(event) {
@@ -70,8 +69,6 @@ function addTransaction(event) {
   updateCharts();
 }
 
-
-
 // Function to delete a transaction
 function deleteTransaction(row) {
   const transactionList = document.getElementById("transaction-list");
@@ -96,11 +93,7 @@ function updateCharts() {
     incomeDeductionChart.destroy();
     incomeDeductionChart = null;
   }
-  if (incomeDeductionLineChart) {
-    incomeDeductionLineChart.destroy();
-    incomeDeductionLineChart = null;
-  }
-
+  
   // Get data from transaction table
   const transactionList = document.getElementById("transaction-list");
   const rows = transactionList.getElementsByTagName("tr");
@@ -266,61 +259,6 @@ function updateCharts() {
       },
     },
   });
-
-  // Line chart for income and deduction
-  const incomeDeductionLineChartElement = document.getElementById("income-deduction-line-chart");
-  incomeDeductionLineChart = new Chart(incomeDeductionLineChartElement, {
-    type: "line",
-    data: {
-      labels: dailyTransactionLabels,
-      datasets: [
-        {
-          label: "Income",
-          data: dailyIncomeAmounts,
-          backgroundColor: "rgba(75, 192, 192, 0.8)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          fill: false,
-        },
-        {
-          label: "Deduction",
-          data: dailyDeductionAmounts,
-          backgroundColor: "rgba(255, 99, 132, 0.8)",
-          borderColor: "rgba(255, 99, 132, 1)",
-          fill: false,
-        },
-      ],
-    },
-    options: {
-      responsive: false,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: "Income and Deduction vs Day",
-        },
-        legend: {
-          position: "right",
-        },
-      },
-      scales: {
-        x: {
-          type: "time",
-          time: {
-            parser: "YYYY-MM-DD",
-            tooltipFormat: "ll",
-            unit: "day",
-          },
-          ticks: {
-            source: "labels",
-          },
-        },
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-
 }
 
 // Function to generate random colors for chart elements
