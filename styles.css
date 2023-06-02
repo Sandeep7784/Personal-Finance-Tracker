@@ -167,15 +167,48 @@ select {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  justify-content: center;
-  align-items: center;
-  /* display: inline-block; */
-  height: 400px;
-  width: 900px;
-  margin-right: 20px;
-  vertical-align: top;
+  width: auto;
 }
 
-.chart-container:last-child {
-  margin-right: 0;
+#description-chart-container {
+  flex: 1;
+}
+
+#description-chart {
+  width: auto;
+  height: 400px;
+}
+
+#description-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 40px; /* Increase the margin as desired */
+}
+
+.label-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust the margin as desired */
+}
+
+.color-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px; /* Adjust the margin as desired */
+  border-radius: 50%;
+}
+
+.label-text {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.label-percentage {
+  display: inline-block;
+  margin-left: 6px; /* Adjust the margin as desired */
+  font-size: 14px;
+  color: #888; /* Adjust the color as desired */
 }
