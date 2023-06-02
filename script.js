@@ -9,9 +9,16 @@
 // welcomeMessageElement.innerHTML = "";
 // welcomeMessageElement.appendChild(welcomeMessage);
 
-// Form submission event listener
+// // Form submission event listener
 const form = document.getElementById("transaction-form");
-form.addEventListener("submit", addTransaction);
+form.addEventListener("submit", submitForm);
+
+// const form=document.getElementById("transaction-form");
+// form.addEventListener("submit", function(event) {
+//   // Call the functions from the first and second scripts
+//   addTransaction(event);
+//   // submitForm(event);
+// });
 
 // Initialize charts
 let descriptionChart;
@@ -21,6 +28,7 @@ let incomeDeductionChart;
 // Function to handle form submission
 function addTransaction(event) {
   event.preventDefault();
+  // submitForm(event);
 
   // Get form values
   const descriptionInput = document.getElementById("description");
@@ -278,3 +286,65 @@ function getRandomNumber(min, max) {
 
 // Initial chart update
 updateCharts();
+
+
+// Firebase configuration //
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBcHUL9y5roVcy-PTJhW03dVcOmcX4PI48",
+  authDomain: "transaction-history-7ffab.firebaseapp.com",
+  databaseURL: "https://transaction-history-7ffab-default-rtdb.firebaseio.com",
+  projectId: "transaction-history-7ffab",
+  storageBucket: "transaction-history-7ffab.appspot.com",
+  messagingSenderId: "486424869674",
+  appId: "1:486424869674:web:7c630e73fc452849fabc53"
+};
+
+// initialize firebase
+firebase.initializeApp(firebaseConfig);
+
+// reference your database
+var transactionFormDB = firebase.database().ref("Transactions_History");
+
+// document.getElementById("transaction-form").addEventListener("submit", submitForm);
+
+function submitForm(event) {
+event.preventDefault();
+
+var description = getElementVal("description");
+var amount = getElementVal("amount");
+var type = getElementVal("type");
+var date = getElementVal("date");
+
+console.log(description, amount, type, date);
+
+saveMessages(description, amount, type, date);
+
+//   enable alert
+document.querySelector(".alert").style.display = "block";
+
+//   remove the alert
+setTimeout(() => {
+  document.querySelector(".alert").style.display = "none";
+}, 3000);
+
+//   reset the form
+// document.getElementById("transaction-form").reset();
+addTransaction(event);
+}
+
+const saveMessages = (description, amount, type, date) => {
+var newContactForm = transactionFormDB.push();
+
+newContactForm.set({
+  description: description, 
+  amount: amount, 
+  type: type, 
+  date: date,
+});
+};
+
+const getElementVal = (id) => {
+return document.getElementById(id).value;
+};
