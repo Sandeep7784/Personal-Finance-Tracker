@@ -175,6 +175,8 @@ function updateCharts() {
 
   // Create description chart
   const descriptionChartElement = document.getElementById("description-chart");
+  const descriptionLabelsDiv = document.getElementById("description-labels");
+
   descriptionChart = new Chart(descriptionChartElement, {
     type: "doughnut",
     data: {
@@ -194,7 +196,43 @@ function updateCharts() {
           text: "Transaction Description Breakdown",
         },
         legend: {
-          position: "right",
+          display: false, // Hide legend labels
+        },
+      },
+      animation: {
+        onComplete: function () {
+          // Generate label text and percentages
+          const chartData = this.data.datasets[0].data;
+          const total = chartData.reduce((acc, val) => acc + val, 0);
+          const labelPercentages = chartData.map((value) => ((value / total) * 100).toFixed(2) + "%");
+
+          // Generate labels and percentages in the inline div
+          descriptionLabelsDiv.innerHTML = "";
+          for (let i = 0; i < descriptionLabels.length; i++) {
+            const label = descriptionLabels[i];
+            const percentage = labelPercentages[i];
+            const color = this.data.datasets[0].backgroundColor[i];
+
+            const labelContainer = document.createElement("div");
+            labelContainer.classList.add("label-container");
+
+            const colorIndicator = document.createElement("span");
+            colorIndicator.classList.add("color-indicator");
+            colorIndicator.style.backgroundColor = color;
+
+            const labelText = document.createElement("span");
+            labelText.classList.add("label-text");
+            labelText.textContent = label;
+
+            const labelPercentage = document.createElement("span");
+            labelPercentage.classList.add("label-percentage");
+            labelPercentage.textContent = percentage;
+
+            labelContainer.appendChild(colorIndicator);
+            labelContainer.appendChild(labelText);
+            labelContainer.appendChild(labelPercentage);
+            descriptionLabelsDiv.appendChild(labelContainer);
+          }
         },
       },
     },
