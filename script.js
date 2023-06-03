@@ -25,10 +25,9 @@ let descriptionChart;
 let dailyTransactionChart;
 let incomeDeductionChart;
 
-// Function to handle form submission
-function addTransaction(event) {
+// Function to handle form submission and add/update a transaction
+function addTransaction(event, rowIndex = -1) {
   event.preventDefault();
-  // submitForm(event);
 
   // Get form values
   const descriptionInput = document.getElementById("description");
@@ -41,20 +40,27 @@ function addTransaction(event) {
   const type = typeInput.value;
   const date = dateInput.value;
 
+  // Perform validation
+  if (!description || isNaN(amount) || !isFinite(amount) || !type || !date) {
+    // alert("Please fill in all fields and ensure the amount is a valid number.");
+    return;
+  }
+
   // Clear form values
   descriptionInput.value = "";
   amountInput.value = "";
   typeInput.value = "";
   dateInput.value = "";
 
-  // Add transaction to table
+  // Create or update transaction row
   const transactionList = document.getElementById("transaction-list");
-  const row = transactionList.insertRow(1);
+  const row = rowIndex === -1 ? transactionList.insertRow(1) : transactionList.rows[rowIndex];
   const descriptionCell = row.insertCell(0);
   const amountCell = row.insertCell(1);
   const typeCell = row.insertCell(2);
   const dateCell = row.insertCell(3);
   const deleteCell = row.insertCell(4);
+  const editCell = row.insertCell(5);
 
   descriptionCell.textContent = description;
   amountCell.textContent = amount.toFixed(2);
@@ -66,6 +72,12 @@ function addTransaction(event) {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", deleteTransaction.bind(null, row));
   deleteCell.appendChild(deleteButton);
+
+  const editButton = document.createElement("button");
+  editButton.textContent = "Edit";
+  editButton.classList.add("edit-button");
+  editButton.addEventListener("click", editTransaction.bind(null, row));
+  editCell.appendChild(editButton);
 
   if (type === "income") {
     row.classList.add("income-row");
@@ -85,6 +97,36 @@ function deleteTransaction(row) {
   // Update charts
   updateCharts();
 }
+
+// Function to edit a transaction
+function editTransaction(row) {
+  const descriptionCell = row.cells[0];
+  const amountCell = row.cells[1];
+  const typeCell = row.cells[2];
+  const dateCell = row.cells[3];
+
+  // Fill form with existing transaction data
+  const descriptionInput = document.getElementById("description");
+  const amountInput = document.getElementById("amount");
+  const typeInput = document.getElementById("type");
+  const dateInput = document.getElementById("date");
+
+  descriptionInput.value = descriptionCell.textContent;
+  amountInput.value = parseFloat(amountCell.textContent);
+  typeInput.value = typeCell.textContent;
+  dateInput.value = dateCell.textContent;
+
+  // Delete existing transaction row
+  const transactionList = document.getElementById("transaction-list");
+  transactionList.deleteRow(row.rowIndex);
+
+  // Update charts without adding a new row
+  updateCharts();
+
+  // Scroll to the top of the form
+  document.getElementById("transaction-form").scrollIntoView({ behavior: "smooth" });
+}
+
 
 // Function to update the charts
 function updateCharts() {
@@ -332,18 +374,32 @@ function getRandomNumber(min, max) {
 // Initial chart update
 updateCharts();
 
+// Get the form element
+const formElement = document.getElementById("transaction-form");
+
+// Add event listener to the form submit event
+formElement.addEventListener("submit", addTransaction);
+
+// Add event listener to the Edit buttons
+const editButtons = document.getElementsByClassName("edit-button");
+Array.from(editButtons).forEach((button) => {
+  button.addEventListener("click", () => {
+    const row = button.parentNode.parentNode;
+    editTransaction(row);
+  });
+});
+
 // Firebase configuration //
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "apikey",
-  authDomain: "authdomain",
-  databaseURL: "databaseurl",
-  projectId: "projectid",
-  storageBucket: "storagebucket",
-  messagingSenderId: "messagingSenderId",
-  appId: "appid",
-  measurementId: "measurementId",
+  apiKey: "AIzaSyBcHUL9y5roVcy-PTJhW03dVcOmcX4PI48",
+  authDomain: "transaction-history-7ffab.firebaseapp.com",
+  databaseURL: "https://transaction-history-7ffab-default-rtdb.firebaseio.com",
+  projectId: "transaction-history-7ffab",
+  storageBucket: "transaction-history-7ffab.appspot.com",
+  messagingSenderId: "486424869674",
+  appId: "1:486424869674:web:7c630e73fc452849fabc53"
 };
 
 // initialize firebase
@@ -358,11 +414,17 @@ function submitForm(event) {
   event.preventDefault();
 
   var description = getElementVal("description");
-  var amount = getElementVal("amount");
+  var amount = parseFloat(getElementVal("amount")); 
   var type = getElementVal("type");
   var date = getElementVal("date");
 
   console.log(description, amount, type, date);
+
+  // Check if the amount is a valid number
+  if (isNaN(amount)) {
+    alert("Please enter a valid amount.");
+    return;
+  }
 
   saveMessages(description, amount, type, date);
 

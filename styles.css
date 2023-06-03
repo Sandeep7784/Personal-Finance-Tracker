@@ -149,6 +149,20 @@ select {
   background-color: #d32f2f;
 }
 
+.edit-button {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #1976d2;
+}
+
 .hidden {
   display: none;
 }
