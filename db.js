@@ -1,12 +1,13 @@
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBcHUL9y5roVcy-PTJhW03dVcOmcX4PI48",
-  authDomain: "transaction-history-7ffab.firebaseapp.com",
-  databaseURL: "https://transaction-history-7ffab-default-rtdb.firebaseio.com",
-  projectId: "transaction-history-7ffab",
-  storageBucket: "transaction-history-7ffab.appspot.com",
-  messagingSenderId: "486424869674",
-  appId: "1:486424869674:web:7c630e73fc452849fabc53"
+  apiKey: "apikey",
+  authDomain: "authdomain",
+  databaseURL: "databaseurl",
+  projectId: "projectid",
+  storageBucket: "storagebucket",
+  messagingSenderId: "messagingSenderId",
+  appId: "appid",
+  measurementId: "measurementId"
 };
 
   // initialize firebase
