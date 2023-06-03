@@ -1,22 +1,11 @@
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "apikey",
-  authDomain: "authdomain",
-  databaseURL: "databaseurl",
-  projectId: "projectid",
-  storageBucket: "storagebucket",
-  messagingSenderId: "messagingSenderId",
-  appId: "appid",
-  measurementId: "measurementId"
-};
-
-  // initialize firebase
-firebase.initializeApp(firebaseConfig);
+import firebase from "./config.js";
 
 // reference your database
 var transactionFormDB = firebase.database().ref("Transactions_History");
 
-document.getElementById("transaction-form").addEventListener("submit", submitForm);
+document
+  .getElementById("transaction-form")
+  .addEventListener("submit", submitForm);
 // document.getElementById("transaction-form");
 
 function submitForm(e) {
@@ -26,7 +15,7 @@ function submitForm(e) {
   var amount = getElementVal("amount");
   var type = getElementVal("type");
   var date = getElementVal("date");
-  
+
   console.log(description, amount, type, date);
 
   saveMessages(description, amount, type, date);
@@ -47,9 +36,9 @@ const saveMessages = (description, amount, type, date) => {
   var newContactForm = transactionFormDB.push();
 
   newContactForm.set({
-    description: description, 
-    amount: amount, 
-    type: type, 
+    description: description,
+    amount: amount,
+    type: type,
     date: date,
   });
 };
