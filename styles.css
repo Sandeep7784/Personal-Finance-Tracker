@@ -71,7 +71,8 @@ select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 15px !important;
+  height: 40px;
 }
 
 .add-button {
@@ -114,11 +115,11 @@ select {
 }
 
 .income-row {
-  background-color: #c8f7c5; /* Light green color */
+  background-color: #c8f7c5; /* Light gren color */
 }
 
 .deduction-row {
-  background-color: #f7c5c5; /* Light red color */
+  background-color: #f7c5c5; /* Light red colr */
 }
 
 .delete-button {
@@ -168,6 +169,9 @@ select {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   width: auto;
+  flex-direction: row; 
+  justify-content: center; 
+  align-items: center; 
 }
 
 #description-chart-container {
@@ -184,20 +188,20 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 40px; /* Increase the margin as desired */
+  margin-left: 40px; 
 }
 
 .label-container {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* Adjust the margin as desired */
+  margin-bottom: 10px; 
 }
 
 .color-indicator {
   display: inline-block;
   width: 12px;
   height: 12px;
-  margin-right: 6px; /* Adjust the margin as desired */
+  margin-right: 6px; 
   border-radius: 50%;
 }
 
@@ -208,9 +212,9 @@ select {
 
 .label-percentage {
   display: inline-block;
-  margin-left: 6px; /* Adjust the margin as desired */
+  margin-left: 6px; 
   font-size: 14px;
-  color: #888; /* Adjust the color as desired */
+  color: #888; 
 }
 
 .alert{
@@ -222,4 +226,90 @@ select {
   font-size: 18px;
   font-weight: 900;
   display: none;
+}
+
+/* CSS for the Log in and Sign up form */
+.form {
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form h2 {
+  text-align: center;
+  color: #5a5af3;
+}
+
+.form p {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-top: 4px;
+  height: 35px; 
+}
+
+button[type="submit"] {
+  width: 40%;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #5a5af3;
+  color: white;
+  border: none;
+  border-radius: 150px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #4343d8;
+}
+
+.error-message {
+  display: none;
+  color: red !important;
+  font-size: 14px;
+  margin-top: 15px !important;
+  margin-bottom: 0px !important;
+  font-weight: 600;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.signup-link a {
+  color: #5a5af3;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
 }
