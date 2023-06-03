@@ -101,7 +101,7 @@ function updateCharts() {
     incomeDeductionChart.destroy();
     incomeDeductionChart = null;
   }
-  
+
   // Get data from transaction table
   const transactionList = document.getElementById("transaction-list");
   const rows = transactionList.getElementsByTagName("tr");
@@ -239,9 +239,11 @@ function updateCharts() {
   });
 
   // Create income and deduction v/s day chart
-  const dailyTransactionChartElement = document.getElementById("daily-transaction-chart");
-  dailyTransactionChartElement.width = 600; // Set the width of the chart
-  dailyTransactionChartElement.height = 300; // Set the height of the chart
+  const dailyTransactionChartElement = document.getElementById(
+    "daily-transaction-chart"
+  );
+  dailyTransactionChartElement.width = 800; // Set the width of the chart
+  dailyTransactionChartElement.height = 400; // Set the height of the chart
   dailyTransactionChart = new Chart(dailyTransactionChartElement, {
     type: "bar",
     data: {
@@ -268,7 +270,7 @@ function updateCharts() {
           text: "Income and Deduction vs Day",
         },
         legend: {
-          position: 'right',
+          position: "right",
         },
       },
       scales: {
@@ -283,7 +285,9 @@ function updateCharts() {
   });
 
   // Create income and deduction chart
-  const incomeDeductionChartElement = document.getElementById("income-deduction-chart");
+  const incomeDeductionChartElement = document.getElementById(
+    "income-deduction-chart"
+  );
   incomeDeductionChart = new Chart(incomeDeductionChartElement, {
     type: "pie",
     data: {
@@ -311,7 +315,10 @@ function updateCharts() {
 function getRandomColors(count) {
   const colors = [];
   for (let i = 0; i < count; i++) {
-    const color = `rgba(${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)}, 0.8)`;
+    const color = `rgba(${getRandomNumber(0, 255)}, ${getRandomNumber(
+      0,
+      255
+    )}, ${getRandomNumber(0, 255)}, 0.8)`;
     colors.push(color);
   }
   return colors;
@@ -324,7 +331,6 @@ function getRandomNumber(min, max) {
 
 // Initial chart update
 updateCharts();
-
 
 // Firebase configuration //
 
@@ -348,41 +354,41 @@ var transactionFormDB = firebase.database().ref("Transactions_History");
 // document.getElementById("transaction-form").addEventListener("submit", submitForm);
 
 function submitForm(event) {
-event.preventDefault();
+  event.preventDefault();
 
-var description = getElementVal("description");
-var amount = getElementVal("amount");
-var type = getElementVal("type");
-var date = getElementVal("date");
+  var description = getElementVal("description");
+  var amount = getElementVal("amount");
+  var type = getElementVal("type");
+  var date = getElementVal("date");
 
-console.log(description, amount, type, date);
+  console.log(description, amount, type, date);
 
-saveMessages(description, amount, type, date);
+  saveMessages(description, amount, type, date);
 
-//   enable alert
-document.querySelector(".alert").style.display = "block";
+  //   enable alert
+  document.querySelector(".alert").style.display = "block";
 
-//   remove the alert
-setTimeout(() => {
-  document.querySelector(".alert").style.display = "none";
-}, 3000);
+  //   remove the alert
+  setTimeout(() => {
+    document.querySelector(".alert").style.display = "none";
+  }, 3000);
 
-//   reset the form
-// document.getElementById("transaction-form").reset();
-addTransaction(event);
+  //   reset the form
+  // document.getElementById("transaction-form").reset();
+  addTransaction(event);
 }
 
 const saveMessages = (description, amount, type, date) => {
-var newContactForm = transactionFormDB.push();
+  var newContactForm = transactionFormDB.push();
 
-newContactForm.set({
-  description: description, 
-  amount: amount, 
-  type: type, 
-  date: date,
-});
+  newContactForm.set({
+    description: description,
+    amount: amount,
+    type: type,
+    date: date,
+  });
 };
 
 const getElementVal = (id) => {
-return document.getElementById(id).value;
+  return document.getElementById(id).value;
 };
