@@ -1,0 +1,79 @@
+.graph-header {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.bottom-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container {
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: auto;
+  flex-direction: row; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+#description-chart-container {
+  flex: 1;
+}
+
+#description-chart {
+  width: auto;
+  height: 400px;
+}
+
+#description-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 40px; 
+}
+
+.label-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; 
+}
+
+.color-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px; 
+  border-radius: 50%;
+}
+
+.label-text {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.label-percentage {
+  display: inline-block;
+  margin-left: 6px; 
+  font-size: 14px;
+  color: #888; 
+}
+
+.alert{
+  width: 100%;
+  background: rgb(0, 255, 106);
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 900;
+  display: none;
+}

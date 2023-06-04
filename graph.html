@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphical Analysis</title>
+</head>
+<body>
+    <div class="graph-header"> 
+        <h2>Graphical Analysis</h2>
+      </div>
+      <div class="bottom-section">
+        <div id="loading-message" class="loading-message">Please enter some data to see the Graphical Analysis.</div>
+        <div class="graph-section hidden">
+          <div class="chart-container">
+            <div id="description-chart-container">
+              <canvas id="description-chart"></canvas>
+            </div>
+            <div id="description-labels"></div>
+          </div>
+          <div class="chart-container">
+            <canvas id="daily-transaction-chart"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="income-deduction-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <script src="script.js"></script>
+</body>
+</html>

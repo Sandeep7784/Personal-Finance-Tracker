@@ -22,9 +22,9 @@ body {
 }
 
 .logo {
-  width: 75px; 
-  height: 75px; 
-  margin-right: 10px; 
+  width: 75px;
+  height: 75px;
+  margin-right: 10px;
 }
 
 header {
@@ -39,7 +39,7 @@ h1 {
 }
 
 .username {
-  color: #3ECF8E;
+  color: #3ecf8e;
   font-weight: bold;
 }
 
@@ -50,12 +50,12 @@ main {
 }
 
 .left-section {
-  flex-basis: 50%;
+  flex-basis: 100%;
   padding-right: 10px;
 }
 
 .right-section {
-  flex-basis: 50%;
+  flex-basis: 100%;
   padding-left: 10px;
 }
 
@@ -66,7 +66,7 @@ main {
 
 h2 {
   color: #5a5af3;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .form-group {
@@ -84,8 +84,8 @@ select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 15px !important;
-  height: 40px;
+  /* border-radius: 15px !important; */
+  /* height: 40px; */
 }
 
 .add-button {
@@ -96,10 +96,24 @@ select {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 0;
 }
 
 .add-button:hover {
   background-color: #4343d8;
+}
+.cancel-button {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #d84315;
 }
 
 .transaction-list-container {
@@ -203,6 +217,88 @@ select {
   font-weight: 700;
 }
 
+/* add transaction button */
+.add-transaction {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 1rem 7rem;
+  /* padding: 2rem; */
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 8px 12px;
+  color: white;
+  background-color: #1aa333;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.add-transaction:hover {
+  background-color: #5a5af3;
+}
+
+.add-transaction h4 {
+  margin: 0;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+.popup-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888888;
+  border-radius: 5px;
+  width: 50%;
+  font-weight: bolder;
+}
+
+.popup-content hr {
+  border: 1px solid gray;
+  opacity: 0.2;
+}
+
+.popup-content form {
+  margin: 2rem 0;
+}
+
+.popup-content h2 {
+  color: #000000de;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.form-inputs1,
+.form-inputs2,
+.form-inputs3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: stretch;
+}
+
+/* .popup-content button {
+  display: block;
+  margin: 0 auto;
+} */
+.show {
+  display: block;
+}
+
 .graph-header {
   text-align: left;
   margin-top: 20px;
@@ -224,9 +320,9 @@ select {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   width: auto;
-  flex-direction: row; 
-  justify-content: center; 
-  align-items: center; 
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 #description-chart-container {
@@ -243,20 +339,20 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 40px; 
+  margin-left: 40px;
 }
 
 .label-container {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .color-indicator {
   display: inline-block;
   width: 12px;
   height: 12px;
-  margin-right: 6px; 
+  margin-right: 6px;
   border-radius: 50%;
 }
 
@@ -267,12 +363,12 @@ select {
 
 .label-percentage {
   display: inline-block;
-  margin-left: 6px; 
+  margin-left: 6px;
   font-size: 14px;
-  color: #888; 
+  color: #888;
 }
 
-.alert{
+.alert {
   width: 100%;
   background: rgb(0, 255, 106);
   padding: 10px 20px;
@@ -311,34 +407,65 @@ select {
 
 .form-group {
   margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 0.7rem 0.5rem;
+  flex: 1;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
+  font-size: 12px;
   color: #666;
-  margin-top: 8px;
+  /* margin-top: 8px; */
 }
 
 .form-group input {
   width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin-top: 4px;
-  height: 35px; 
+  padding: 0;
+  border: none;
+  margin: 0;
+  /* margin-top: 4px; */
+  /* height: 35px; */
+}
+
+.form-group input:focus {
+  outline: none;
+}
+
+.form-group select:focus {
+  outline: none;
+}
+
+.form-group select option {
+  box-sizing: border-box;
+  padding: 1rem 2rem;
+  border: none;
+  background-color: transparent;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 0;
+  border: none;
+  margin: 0;
+  /* margin-top: 4px; */
+  /* height: 35px; */
 }
 
 button[type="submit"] {
-  width: 40%;
-  margin: 0 auto;
-  padding: 10px;
+  /* width: 40%; */
+  /* margin: 0 auto; */
+  /* padding: 10px; */
   background-color: #5a5af3;
   color: white;
   border: none;
-  border-radius: 150px;
+  /* border-radius: 150px; */
   cursor: pointer;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 button[type="submit"]:hover {
