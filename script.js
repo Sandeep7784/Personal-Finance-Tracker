@@ -466,6 +466,8 @@ var transactionFormDB = firebase.database().ref("Transactions_History");
 // document.getElementById("transaction-form").addEventListener("submit", submitForm);
 
 function submitForm(event) {
+  popup.classList.remove("show"); //to remove popup
+
   event.preventDefault();
 
   var description = getElementVal("description");
