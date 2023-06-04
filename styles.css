@@ -30,13 +30,32 @@ body {
 
 header {
   text-align: center;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+}
+
+.header-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-div h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+hr {
+  border: 1px solid gray;
+  opacity: 0.2;
 }
 
 h1 {
   color: #00000f;
-  font-size: 44px;
-  margin-left: 15px;
+  /* font-size: 44px; */
+  font-weight: 100;
+  /* margin-left: 15px; */
 }
 
 .username {
@@ -48,6 +67,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 2rem 0;
 }
 
 .left-section {
@@ -227,15 +247,15 @@ select {
 
 /* add transaction button */
 .add-transaction {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  margin: 1rem 7rem;
+  /* position: absolute; */
+  /* right: 0; */
+  /* top: 0; */
+  /* margin: 1rem 7rem; */
   /* padding: 2rem; */
-  font-size: 14px;
+  font-size: 1.2rem;
   line-height: 16px;
-  font-weight: 500;
-  padding: 8px 12px;
+  font-weight: 100;
+  padding: 1rem 2rem;
   color: white;
   background-color: #1aa333;
   cursor: pointer;
