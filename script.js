@@ -521,6 +521,7 @@ const saveMessages = (description, amount, type, date) => {
     amount: amount,
     type: type,
     date: date,
+    username: localStorage.userid,
   });
 };
 
