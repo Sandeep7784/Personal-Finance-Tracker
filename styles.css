@@ -127,6 +127,12 @@ select {
   font-weight: bold;
 }
 
+#transaction-list .delete-button,
+#transaction-list .edit-button {
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
 .income-row {
   background-color: #c8f7c5; /* Light gren color */
 }
@@ -147,6 +153,42 @@ select {
 
 .delete-button:hover {
   background-color: #d32f2f;
+}
+
+.edit-button {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #1976d2;
+}
+
+#totals-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#totals-container span {
+  font-weight: bold;
+}
+
+#total-income {
+  color: rgb(72, 211, 137);
+}
+
+#total-deduction {
+  color: rgb(211, 72, 72);
 }
 
 .hidden {

@@ -20,10 +20,9 @@ let descriptionChart;
 let dailyTransactionChart;
 let incomeDeductionChart;
 
-// Function to handle form submission
-function addTransaction(event) {
+// Function to handle form submission and add/update a transaction
+function addTransaction(event, rowIndex = -1) {
   event.preventDefault();
-  // submitForm(event);
 
   // Get form values
   const descriptionInput = document.getElementById("description");
@@ -36,20 +35,27 @@ function addTransaction(event) {
   const type = typeInput.value;
   const date = dateInput.value;
 
+  // Perform validation
+  if (!description || isNaN(amount) || !isFinite(amount) || !type || !date) {
+    // alert("Please fill in all fields and ensure the amount is a valid number.");
+    return;
+  }
+
   // Clear form values
   descriptionInput.value = "";
   amountInput.value = "";
   typeInput.value = "";
   dateInput.value = "";
 
-  // Add transaction to table
+  // Create or update transaction row
   const transactionList = document.getElementById("transaction-list");
-  const row = transactionList.insertRow(1);
+  const row = rowIndex === -1 ? transactionList.insertRow(1) : transactionList.rows[rowIndex];
   const descriptionCell = row.insertCell(0);
   const amountCell = row.insertCell(1);
   const typeCell = row.insertCell(2);
   const dateCell = row.insertCell(3);
   const deleteCell = row.insertCell(4);
+  const editCell = row.insertCell(5);
 
   descriptionCell.textContent = description;
   amountCell.textContent = amount.toFixed(2);
@@ -65,6 +71,12 @@ function addTransaction(event) {
   );
   deleteCell.appendChild(deleteButton);
 
+  const editButton = document.createElement("button");
+  editButton.textContent = "Edit";
+  editButton.classList.add("edit-button");
+  editButton.addEventListener("click", editTransaction.bind(null, row));
+  editCell.appendChild(editButton);
+
   if (type === "income") {
     row.classList.add("income-row");
   } else if (type === "deduction") {
@@ -73,6 +85,10 @@ function addTransaction(event) {
 
   // Update charts
   updateCharts();
+
+  // Update total income and total deduction
+  updateTotalIncome();
+  updateTotalDeduction();
 }
 
 // Function to delete a transaction
@@ -82,6 +98,43 @@ function deleteTransaction(row,description, amount, type, date) {
 
   // Update charts
   updateCharts();
+
+  // Update total income and total deduction
+  updateTotalIncome();
+  updateTotalDeduction();
+}
+
+// Function to edit a transaction
+function editTransaction(row) {
+  const descriptionCell = row.cells[0];
+  const amountCell = row.cells[1];
+  const typeCell = row.cells[2];
+  const dateCell = row.cells[3];
+
+  // Fill form with existing transaction data
+  const descriptionInput = document.getElementById("description");
+  const amountInput = document.getElementById("amount");
+  const typeInput = document.getElementById("type");
+  const dateInput = document.getElementById("date");
+
+  descriptionInput.value = descriptionCell.textContent;
+  amountInput.value = parseFloat(amountCell.textContent);
+  typeInput.value = typeCell.textContent;
+  dateInput.value = dateCell.textContent;
+
+  // Delete existing transaction row
+  const transactionList = document.getElementById("transaction-list");
+  transactionList.deleteRow(row.rowIndex);
+
+  // Update charts without adding a new row
+  updateCharts();
+
+  // Scroll to the top of the form
+  document.getElementById("transaction-form").scrollIntoView({ behavior: "smooth" });
+
+  // Update total income and total deduction
+  updateTotalIncome();
+  updateTotalDeduction();
 }
 
 // Function to update the charts
@@ -103,6 +156,23 @@ function updateCharts() {
   // Get data from transaction table
   const transactionList = document.getElementById("transaction-list");
   const rows = transactionList.getElementsByTagName("tr");
+
+   // Sort rows based on date in descending order
+   const sortedRows = Array.from(rows).slice(1).sort((a, b) => {
+    const dateA = new Date(a.cells[3].textContent);
+    const dateB = new Date(b.cells[3].textContent);
+    return dateB - dateA;
+  });
+
+  // Clear transaction list
+  while (transactionList.rows.length > 1) {
+    transactionList.deleteRow(1);
+  }
+
+  // Add sorted rows back to the transaction list
+  for (const row of sortedRows) {
+    transactionList.appendChild(row);
+  }
 
   const descriptionLabels = [];
   const descriptionAmounts = [];
@@ -151,11 +221,16 @@ function updateCharts() {
       }
     }
 
-    // Update income and deduction totals
-    if (type === "income") {
-      totalIncome += amount;
-    } else if (type === "deduction") {
-      totalDeduction += amount;
+    // Loop through sorted rows and calculate totals
+    for (const row of sortedRows) {
+      const amount = parseFloat(row.cells[1].textContent);
+      const type = row.cells[2].textContent;
+
+      if (type === "income") {
+        totalIncome += amount;
+      } else if (type === "deduction") {
+        totalDeduction += amount;
+      }
     }
   }
 
@@ -332,6 +407,75 @@ function getRandomNumber(min, max) {
 // Initial chart update
 updateCharts();
 
+// Get the form element
+const formElement = document.getElementById("transaction-form");
+
+// Add event listener to the form submit event
+formElement.addEventListener("submit", addTransaction);
+
+// Add event listener to the Edit buttons
+const editButtons = document.getElementsByClassName("edit-button");
+Array.from(editButtons).forEach((button) => {
+  button.addEventListener("click", () => {
+    const row = button.parentNode.parentNode;
+    editTransaction(row);
+  });
+});
+
+// Function to update total income
+function updateTotalIncome() {
+  const transactionList = document.getElementById("transaction-list");
+  let totalIncome = 0;
+
+  for (let i = 1; i < transactionList.rows.length; i++) {
+    const row = transactionList.rows[i];
+    const amountCell = row.cells[1];
+    const typeCell = row.cells[2];
+
+    if (typeCell.textContent === "income") {
+      totalIncome += parseFloat(amountCell.textContent);
+    }
+  }
+
+  const totalIncomeElement = document.getElementById("total-income");
+  totalIncomeElement.textContent = "Total Income: " + totalIncome.toFixed(2);
+}
+
+// Function to update total deduction
+function updateTotalDeduction() {
+  const transactionList = document.getElementById("transaction-list");
+  let totalDeduction = 0;
+
+  for (let i = 1; i < transactionList.rows.length; i++) {
+    const row = transactionList.rows[i];
+    const amountCell = row.cells[1];
+    const typeCell = row.cells[2];
+
+    if (typeCell.textContent === "deduction") {
+      totalDeduction += parseFloat(amountCell.textContent);
+    }
+  }
+
+  const totalDeductionElement = document.getElementById("total-deduction");
+  totalDeductionElement.textContent = "Total Deduction: " + totalDeduction.toFixed(2);
+}
+
+// Firebase configuration //
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "apikey",
+  authDomain: "authdomain",
+  databaseURL: "databaseurl",
+  projectId: "projectid",
+  storageBucket: "storagebucket",
+  messagingSenderId: "messagingSenderId",
+  appId: "appid",
+  measurementId: "measurementId"
+};
+
+// initialize firebase
+firebase.initializeApp(firebaseConfig);
 
 // reference your database
 var transactionFormDB = firebase.database().ref("Transactions_History");
@@ -342,11 +486,17 @@ function submitForm(event) {
   event.preventDefault();
 
   var description = getElementVal("description");
-  var amount = getElementVal("amount");
+  var amount = parseFloat(getElementVal("amount")); 
   var type = getElementVal("type");
   var date = getElementVal("date");
 
   console.log(description, amount, type, date);
+
+  // Check if the amount is a valid number
+  if (isNaN(amount)) {
+    alert("Please enter a valid amount.");
+    return;
+  }
 
   saveMessages(description, amount, type, date);
 
