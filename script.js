@@ -1,14 +1,9 @@
-// // Get the user's name
-// const userName = prompt("Please enter your name:");
-// const welcomeMessage = document.createElement("span");
-// welcomeMessage.textContent = `Hi ${userName}, here are your transactions`;
-// welcomeMessage.classList.add("username");
+import firebase from "./config.js";
 
-// // Display the welcome message
-// const welcomeMessageElement = document.getElementById("welcome-message");
-// welcomeMessageElement.innerHTML = "";
-// welcomeMessageElement.appendChild(welcomeMessage);
-
+// // Check if user is logged in
+if (localStorage.getItem('userid') === null) {
+  window.location.href = "login.html";
+}
 // // Form submission event listener
 const form = document.getElementById("transaction-form");
 form.addEventListener("submit", submitForm);
@@ -70,7 +65,10 @@ function addTransaction(event, rowIndex = -1) {
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.classList.add("delete-button");
-  deleteButton.addEventListener("click", deleteTransaction.bind(null, row));
+  deleteButton.addEventListener(
+    "click",
+    deleteTransaction.bind(null, row, description, amount, type, date)
+  );
   deleteCell.appendChild(deleteButton);
 
   const editButton = document.createElement("button");
@@ -94,7 +92,7 @@ function addTransaction(event, rowIndex = -1) {
 }
 
 // Function to delete a transaction
-function deleteTransaction(row) {
+function deleteTransaction(row,description, amount, type, date) {
   const transactionList = document.getElementById("transaction-list");
   transactionList.deleteRow(row.rowIndex);
 
@@ -279,7 +277,9 @@ function updateCharts() {
           // Generate label text and percentages
           const chartData = this.data.datasets[0].data;
           const total = chartData.reduce((acc, val) => acc + val, 0);
-          const labelPercentages = chartData.map((value) => ((value / total) * 100).toFixed(2) + "%");
+          const labelPercentages = chartData.map(
+            (value) => ((value / total) * 100).toFixed(2) + "%"
+          );
 
           // Generate labels and percentages in the inline div
           descriptionLabelsDiv.innerHTML = "";
