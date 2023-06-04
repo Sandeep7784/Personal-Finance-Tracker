@@ -87,6 +87,10 @@ function addTransaction(event, rowIndex = -1) {
 
   // Update charts
   updateCharts();
+
+  // Update total income and total deduction
+  updateTotalIncome();
+  updateTotalDeduction();
 }
 
 // Function to delete a transaction
@@ -96,6 +100,10 @@ function deleteTransaction(row) {
 
   // Update charts
   updateCharts();
+
+  // Update total income and total deduction
+  updateTotalIncome();
+  updateTotalDeduction();
 }
 
 // Function to edit a transaction
@@ -125,8 +133,11 @@ function editTransaction(row) {
 
   // Scroll to the top of the form
   document.getElementById("transaction-form").scrollIntoView({ behavior: "smooth" });
-}
 
+  // Update total income and total deduction
+  updateTotalIncome();
+  updateTotalDeduction();
+}
 
 // Function to update the charts
 function updateCharts() {
@@ -388,6 +399,44 @@ Array.from(editButtons).forEach((button) => {
     editTransaction(row);
   });
 });
+
+// Function to update total income
+function updateTotalIncome() {
+  const transactionList = document.getElementById("transaction-list");
+  let totalIncome = 0;
+
+  for (let i = 1; i < transactionList.rows.length; i++) {
+    const row = transactionList.rows[i];
+    const amountCell = row.cells[1];
+    const typeCell = row.cells[2];
+
+    if (typeCell.textContent === "income") {
+      totalIncome += parseFloat(amountCell.textContent);
+    }
+  }
+
+  const totalIncomeElement = document.getElementById("total-income");
+  totalIncomeElement.textContent = "Total Income: " + totalIncome.toFixed(2);
+}
+
+// Function to update total deduction
+function updateTotalDeduction() {
+  const transactionList = document.getElementById("transaction-list");
+  let totalDeduction = 0;
+
+  for (let i = 1; i < transactionList.rows.length; i++) {
+    const row = transactionList.rows[i];
+    const amountCell = row.cells[1];
+    const typeCell = row.cells[2];
+
+    if (typeCell.textContent === "deduction") {
+      totalDeduction += parseFloat(amountCell.textContent);
+    }
+  }
+
+  const totalDeductionElement = document.getElementById("total-deduction");
+  totalDeductionElement.textContent = "Total Deduction: " + totalDeduction.toFixed(2);
+}
 
 // Firebase configuration //
 
