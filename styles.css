@@ -6,7 +6,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+  background-color: #fbfdfe;
 }
 
 .container {
@@ -65,7 +66,12 @@ main {
 }
 
 h2 {
-  color: #5a5af3;
+  /* color: #5a5af3; */
+  color: #000000de;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 24px;
   /* margin-bottom: 10px; */
 }
 
@@ -134,12 +140,14 @@ select {
 #transaction-list td {
   padding: 8px;
   border-bottom: 1px solid #ddd;
+  font-size: 1.5rem;
+  font-weight: 100;
 }
 
-#transaction-list th {
+/* #transaction-list th {
   background-color: #f2f2f2;
   font-weight: bold;
-}
+} */
 
 #transaction-list .delete-button,
 #transaction-list .edit-button {
@@ -187,22 +195,22 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 1rem;
   background-color: #f0f0f0;
-  border-radius: 5px;
+  border-radius: 4px;
   margin-top: 20px;
-}
-
-#totals-container span {
-  font-weight: bold;
 }
 
 #total-income {
   color: rgb(72, 211, 137);
+  font-size: 1.5rem;
+  font-weight: 100;
 }
 
 #total-deduction {
   color: rgb(211, 72, 72);
+  font-size: 1.5rem;
+  font-weight: 100;
 }
 
 .hidden {
