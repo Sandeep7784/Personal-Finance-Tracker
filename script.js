@@ -159,6 +159,23 @@ function updateCharts() {
   const transactionList = document.getElementById("transaction-list");
   const rows = transactionList.getElementsByTagName("tr");
 
+   // Sort rows based on date in descending order
+   const sortedRows = Array.from(rows).slice(1).sort((a, b) => {
+    const dateA = new Date(a.cells[3].textContent);
+    const dateB = new Date(b.cells[3].textContent);
+    return dateB - dateA;
+  });
+
+  // Clear transaction list
+  while (transactionList.rows.length > 1) {
+    transactionList.deleteRow(1);
+  }
+
+  // Add sorted rows back to the transaction list
+  for (const row of sortedRows) {
+    transactionList.appendChild(row);
+  }
+
   const descriptionLabels = [];
   const descriptionAmounts = [];
 
@@ -206,11 +223,16 @@ function updateCharts() {
       }
     }
 
-    // Update income and deduction totals
-    if (type === "income") {
-      totalIncome += amount;
-    } else if (type === "deduction") {
-      totalDeduction += amount;
+    // Loop through sorted rows and calculate totals
+    for (const row of sortedRows) {
+      const amount = parseFloat(row.cells[1].textContent);
+      const type = row.cells[2].textContent;
+
+      if (type === "income") {
+        totalIncome += amount;
+      } else if (type === "deduction") {
+        totalDeduction += amount;
+      }
     }
   }
 
