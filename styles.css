@@ -290,6 +290,7 @@ select {
   border-radius: 5px;
   width: 50%;
   font-weight: bolder;
+  transition: opacity 0.3s, transform 0.3s;
 }
 
 .popup-content hr {

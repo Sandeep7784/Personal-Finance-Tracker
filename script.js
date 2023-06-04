@@ -464,17 +464,29 @@ function updateTotalDeduction() {
 var transactionFormDB = firebase.database().ref("Transactions_History");
 
 // document.getElementById("transaction-form").addEventListener("submit", submitForm);
+const saveMessages = (description, amount, type, date) => {
+  var newContactForm = transactionFormDB.push();
+
+  newContactForm.set({
+    description: description,
+    amount: amount,
+    type: type,
+    date: date,
+    username: localStorage.userid,
+  });
+};
 
 function submitForm(event) {
   popup.classList.remove("show"); //to remove popup
 
   event.preventDefault();
 
-  var description = getElementVal("description");
-  var amount = parseFloat(getElementVal("amount")); 
-  var type = getElementVal("type");
-  var date = getElementVal("date");
 
+  var description = document.getElementById("description").value;
+  var amount = document.getElementById("amount").value;
+  var type = document.getElementById("type").value;
+  var date = document.getElementById("date").value;
+  
   console.log(description, amount, type, date);
 
   // Check if the amount is a valid number
@@ -498,17 +510,7 @@ function submitForm(event) {
   addTransaction(event);
 }
 
-const saveMessages = (description, amount, type, date) => {
-  var newContactForm = transactionFormDB.push();
 
-  newContactForm.set({
-    description: description,
-    amount: amount,
-    type: type,
-    date: date,
-    username: localStorage.userid,
-  });
-};
 
 const getElementVal = (id) => {
   return document.getElementById(id).value;
