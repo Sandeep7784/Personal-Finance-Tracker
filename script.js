@@ -460,23 +460,6 @@ function updateTotalDeduction() {
   totalDeductionElement.textContent = "Total Deduction: " + totalDeduction.toFixed(2);
 }
 
-// Firebase configuration //
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "apikey",
-  authDomain: "authdomain",
-  databaseURL: "databaseurl",
-  projectId: "projectid",
-  storageBucket: "storagebucket",
-  messagingSenderId: "messagingSenderId",
-  appId: "appid",
-  measurementId: "measurementId"
-};
-
-// initialize firebase
-firebase.initializeApp(firebaseConfig);
-
 // reference your database
 var transactionFormDB = firebase.database().ref("Transactions_History");
 
