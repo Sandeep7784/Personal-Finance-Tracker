@@ -47,6 +47,10 @@ header {
   justify-content: space-between;
 }
 
+.header-div img {
+  width: 50px;
+}
+
 .header-div h1 {
   font-family: "Roboto", sans-serif;
   font-size: 2rem;
@@ -85,6 +89,7 @@ main {
 
 .right-section {
   flex-basis: 100%;
+  min-height: 100vh;
   /* padding-left: 10px; */
 }
 
@@ -356,60 +361,114 @@ select {
   display: block;
 }
 
-.graph-header {
-  text-align: left;
-  margin-top: 20px;
+.slides-btn{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 1rem 0;
 }
 
+.slides-btn button{
+  padding: .5rem 1rem;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.graph-section {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.graph-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.graph-header h2 {
+  color: #000000de;
+  font-family: "Barlow", sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 24px;
+}
+
+.hidden {
+  display: none;
+}
 .bottom-section {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(10px);
 }
 
 .chart-container {
   background-color: #fff;
-  padding: 20px;
+  padding: 1.5rem 3rem;
   display: flex;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   width: auto;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-#description-chart-container {
+/* #description-chart-container {
   flex: 1;
-}
-
-#description-chart {
-  width: auto;
-  height: 400px;
-}
+} */
 
 #description-labels {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 40px;
+  /* margin-left: 40px; */
+}
+
+/* adding css for slides */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
 }
 
 .label-container {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .color-indicator {
   display: inline-block;
   width: 12px;
   height: 12px;
-  margin-right: 6px;
+  /* margin-right: 6px; */
   border-radius: 50%;
 }
 
@@ -420,7 +479,7 @@ select {
 
 .label-percentage {
   display: inline-block;
-  margin-left: 6px;
+  /* margin-left: 6px; */
   font-size: 14px;
   color: #888;
 }
