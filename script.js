@@ -336,12 +336,12 @@ function updateCharts() {
         {
           label: "Income",
           data: dailyIncomeAmounts,
-          backgroundColor: "rgba(75, 192, 192, 0.8)", // Green color for income
+          backgroundColor: "rgb(133,253,158)", // Green color for income
         },
         {
           label: "Deduction",
           data: dailyDeductionAmounts,
-          backgroundColor: "rgba(255, 99, 132, 0.8)", // Red color for deduction
+          backgroundColor: "rgba(253, 140, 140, 1)", // Red color for deduction
         },
       ],
     },
@@ -563,3 +563,31 @@ const getUserDetails = () => {
   });
 };
 getUserDetails();
+
+
+// Slides JS
+// Get references to DOM elements
+const sliderContainer = document.querySelector('.slider-container');
+const slides = Array.from(document.querySelectorAll('.slide'));
+
+// Set the initial active slide
+let activeSlide = 0;
+slides[activeSlide].classList.add('active');
+
+// Function to show the next slide
+function showNextSlide() {
+  slides[activeSlide].classList.remove('active');
+  activeSlide = (activeSlide + 1) % slides.length;
+  slides[activeSlide].classList.add('active');
+}
+
+// Function to show the previous slide
+function showPrevSlide() {
+  slides[activeSlide].classList.remove('active');
+  activeSlide = (activeSlide - 1 + slides.length) % slides.length;
+  slides[activeSlide].classList.add('active');
+}
+
+// Add event listeners to navigation buttons
+document.getElementById('next-button').addEventListener('click', showNextSlide);
+document.getElementById('prev-button').addEventListener('click', showPrevSlide);

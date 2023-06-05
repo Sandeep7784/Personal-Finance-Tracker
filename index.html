@@ -129,18 +129,53 @@
           <div id="loading-message" class="loading-message">
             Please enter some data to see the Graphical Analysis.
           </div>
-          <div class="graph-section hidden">
-            <div class="chart-container">
+          <div class="slides-btn">
+            <button id="prev-button">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="next-button">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="graph-section hidden slider-container">
+            <div class="chart-container slide">
               <div id="description-chart-container">
-                <canvas id="description-chart"></canvas>
+                <canvas
+                  id="description-chart"
+                  style="
+                    box-sizing: border-box;
+                    display: block;
+                    height: 400px;
+                    width: 400px;
+                    padding: 20px;
+                  "
+                  height="600"
+                ></canvas>
               </div>
               <div id="description-labels"></div>
             </div>
-            <div class="chart-container">
-              <canvas id="daily-transaction-chart"></canvas>
+            <div class="chart-container slide">
+              <canvas
+                id="daily-transaction-chart"
+                style="
+                  box-sizing: border-box;
+                  display: block;
+                  height: 400px;
+                  width: 800px;
+                "
+              ></canvas>
             </div>
-            <div class="chart-container">
-              <canvas id="income-deduction-chart"></canvas>
+            <div class="chart-container slide">
+              <canvas
+                id="income-deduction-chart"
+                style="
+                  box-sizing: border-box;
+                  display: block;
+                  height: 400px;
+                  width: 400px;
+                "
+                height="600"
+              ></canvas>
             </div>
           </div>
         </div>
