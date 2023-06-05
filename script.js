@@ -424,6 +424,9 @@ Array.from(editButtons).forEach((button) => {
   });
 });
 
+let nettotalIncome = 0;
+let nettotalDeduction = 0;
+
 // Function to update total income
 function updateTotalIncome() {
   const transactionList = document.getElementById("transaction-list");
@@ -439,13 +442,15 @@ function updateTotalIncome() {
     }
   }
 
+  nettotalIncome = totalIncome;
+
   const totalIncomeElement = document.getElementById("total-income");
   totalIncomeElement.textContent = "Total Income: " + totalIncome.toFixed(2);
 
   const totalBalance = document.getElementById("total-balance");
   const starting_balance = 10000;  //this we have to figure out how to get from the signup page
   console.log(starting_balance);
-  const cur_balance = starting_balance + totalIncome;
+  const cur_balance = starting_balance - nettotalDeduction + nettotalIncome;
   console.log(cur_balance);
   totalBalance.textContent = "Total Balance: " + cur_balance.toFixed(2);
   console.log(totalBalance.textContent);
@@ -466,13 +471,15 @@ function updateTotalDeduction() {
     }
   }
 
+  nettotalDeduction = totalDeduction;
+
   const totalDeductionElement = document.getElementById("total-deduction");
   totalDeductionElement.textContent =
     "Total Deduction: " + totalDeduction.toFixed(2);
 
   const totalBalance = document.getElementById("total-balance");
   const starting_balance = 10000; //this we have to figure out how to get from the signup page
-  const cur_balance = starting_balance - totalDeduction;
+  const cur_balance = starting_balance - nettotalDeduction + nettotalIncome;
   totalBalance.textContent = "Total Balance: " + cur_balance.toFixed(2);
 }
 
