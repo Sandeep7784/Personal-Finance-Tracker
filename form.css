@@ -1,0 +1,370 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+  }
+  
+  .container {
+    max-width: auto;
+    margin: 0 100px;
+    padding: 20px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo {
+    width: 75px; 
+    height: 75px; 
+    margin-right: 10px; 
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    color: #00000f;
+    font-size: 44px;
+    margin-left: 15px;
+  }
+  
+  .username {
+    color: #3ECF8E;
+    font-weight: bold;
+  }
+  
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .left-section {
+    flex-basis: 50%;
+    padding-right: 10px;
+  }
+  
+  .right-section {
+    flex-basis: 50%;
+    padding-left: 10px;
+  }
+  
+  .bottom-section {
+    flex-basis: 100%;
+    margin-top: 20px;
+  }
+  
+  h2 {
+    color: #5a5af3;
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 15px !important;
+    height: 40px;
+  }
+  
+  .add-button {
+    background-color: #5a5af3;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-button:hover {
+    background-color: #4343d8;
+  }
+  
+  .transaction-list-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+  }
+  
+  #transaction-list {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  
+  #transaction-list th,
+  #transaction-list td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #transaction-list th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  #transaction-list .delete-button,
+  #transaction-list .edit-button {
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  
+  .income-row {
+    background-color: #c8f7c5; /* Light gren color */
+  }
+  
+  .deduction-row {
+    background-color: #f7c5c5; /* Light red colr */
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .edit-button {
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #1976d2;
+  }
+  
+  #totals-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  #totals-container span {
+    font-weight: bold;
+  }
+  
+  #total-income {
+    color: rgb(72, 211, 137);
+  }
+  
+  #total-deduction {
+    color: rgb(211, 72, 72);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .loading-message {
+    text-align: center;
+    margin-top: -15px;
+    font-size: 20px;
+    color: #f44336;
+    font-weight: 700;
+  }
+  
+  .graph-header {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .bottom-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .chart-container {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: auto;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  
+  #description-chart-container {
+    flex: 1;
+  }
+  
+  #description-chart {
+    width: auto;
+    height: 400px;
+  }
+  
+  #description-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 40px; 
+  }
+  
+  .label-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+  }
+  
+  .color-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 6px; 
+    border-radius: 50%;
+  }
+  
+  .label-text {
+    display: inline-block;
+    font-size: 14px;
+  }
+  
+  .label-percentage {
+    display: inline-block;
+    margin-left: 6px; 
+    font-size: 14px;
+    color: #888; 
+  }
+  
+  .alert{
+    width: 100%;
+    background: rgb(0, 255, 106);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+    display: none;
+  }
+  
+  /* CSS for the Log in and Sign up form */
+  .form {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .form h2 {
+    text-align: center;
+    color: #5a5af3;
+  }
+  
+  .form p {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    margin-top: 8px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-top: 4px;
+    height: 35px; 
+  }
+  
+  button[type="submit"] {
+    width: 40%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #5a5af3;
+    color: white;
+    border: none;
+    border-radius: 150px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #4343d8;
+  }
+  
+  .error-message {
+    display: none;
+    color: red !important;
+    font-size: 14px;
+    margin-top: 15px !important;
+    margin-bottom: 0px !important;
+    font-weight: 600;
+  }
+  
+  .signup-link {
+    text-align: center;
+    margin-top: 20px !important;
+    margin-bottom: 5px;
+  }
+  
+  .signup-link a {
+    color: #5a5af3;
+    text-decoration: none;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
