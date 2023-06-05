@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -7,7 +10,11 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
   /* background-color: #f2f2f2; */
-  background-color: #fbfdfe;
+  /* background-color: #fbfdfe; */
+  height: 100vh;
+  background: url(./assets/transaction-bg1.jpg) no-repeat center center fixed;
+  backdrop-filter: blur(5px);
+  /* backdrop-filter: contrast(0.5); */
 }
 
 .container {
@@ -43,7 +50,8 @@ header {
 .header-div h1 {
   font-family: "Roboto", sans-serif;
   font-size: 2rem;
-  font-weight: 100;
+  font-weight: 700;
+  color: #00a4ef;
 }
 
 hr {
@@ -72,17 +80,17 @@ main {
 
 .left-section {
   flex-basis: 100%;
-  padding-right: 10px;
+  /* padding-right: 10px; */
 }
 
 .right-section {
   flex-basis: 100%;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 
 .bottom-section {
   flex-basis: 100%;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 h2 {
@@ -156,12 +164,20 @@ select {
   text-align: center;
 }
 
-#transaction-list th,
-#transaction-list td {
-  padding: 8px;
+#transaction-list thead th {
+  padding: 1rem 0.5rem;
   border-bottom: 1px solid #ddd;
-  font-size: 1.5rem;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.2rem;
   font-weight: 100;
+}
+
+#transaction-list tr td {
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #ddd;
+  font-family: "Barlow", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 /* #transaction-list th {
@@ -175,12 +191,12 @@ select {
   padding: 4px 8px;
 }
 
-.income-row {
-  background-color: #c8f7c5; /* Light gren color */
+.odd-row {
+  background-color: #ffffff;
 }
 
-.deduction-row {
-  background-color: #f7c5c5; /* Light red colr */
+.even-row {
+  background-color: #e0e0e0;
 }
 
 .delete-button {
@@ -221,16 +237,26 @@ select {
   margin-top: 20px;
 }
 
-#total-income {
-  color: rgb(72, 211, 137);
+#total-balance {
+  /* color: rgb(72, 211, 137); */
+  font-family: "Barlow", sans-serif;
+  color: #000000;
   font-size: 1.5rem;
-  font-weight: 100;
+  font-weight: 900;
+}
+#total-income {
+  /* color: rgb(72, 211, 137); */
+  font-family: "Barlow", sans-serif;
+  color: #1aa333;
+  font-size: 1.5rem;
+  font-weight: 900;
 }
 
 #total-deduction {
   color: rgb(211, 72, 72);
+  font-family: "Barlow", sans-serif;
   font-size: 1.5rem;
-  font-weight: 100;
+  font-weight: 900;
 }
 
 .hidden {
@@ -241,7 +267,8 @@ select {
   text-align: center;
   margin-top: -15px;
   font-size: 20px;
-  color: #f44336;
+  /* color: #f44336; */
+  color: #d34848;
   font-weight: 700;
 }
 
