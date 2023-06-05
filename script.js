@@ -526,8 +526,33 @@ function submitForm(event) {
   addTransaction(event);
 }
 
-
-
 const getElementVal = (id) => {
   return document.getElementById(id).value;
 };
+
+const getTransaction = () => {
+  var transactionFormDB = firebase.database().ref("Transactions_History");
+  transactionFormDB.on("value", (snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+      const childData = childSnapshot.val();
+      if (childData.username == localStorage.userid) {
+        console.log(childData);
+      }
+    });
+  });
+}
+getTransaction();
+
+const getUserDetails = () => {
+  var userFormDB = firebase.database().ref("registration");
+  userFormDB.on("value", (snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+      const childData = childSnapshot.val();
+      if (childData.username == localStorage.userid) {
+        console.log(childData);
+        return childData;
+      }
+    });
+  });
+}
+getUserDetails();

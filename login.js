@@ -21,7 +21,7 @@ function logInForm(e){
                                         const userid = childSnapshot.key;
                                         console.log(userid);
                                         localStorage.setItem('userid', userid);
-                                        // window.location.href = "index.html"; 
+                                        window.location.href = "index.html"; 
                                 } else {
                                         alert("wrong credentials");
                                 }
