@@ -553,3 +553,33 @@ button[type="submit"]:hover {
 .signup-link a:hover {
   text-decoration: underline;
 }
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  background-color: transparent;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fixed-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.logout-button {
+  background-color: #ff0000;
+  font-size: 18px;
+  font-weight: 100;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+}
+.logout-button:hover {
+  background-color: #c70000;
+}
