@@ -207,6 +207,7 @@ select {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 15px;
 }
 
 .delete-button:hover {
@@ -221,6 +222,7 @@ select {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 15px;
 }
 
 .edit-button:hover {
@@ -379,7 +381,7 @@ select {
   width: auto;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: center;;
 }
 
 #description-chart-container {
@@ -436,7 +438,6 @@ select {
   display: none;
 }
 
-/* CSS for the Log in and Sign up form */
 .form {
   width: 500px;
   margin: 0 auto;
@@ -535,7 +536,7 @@ button[type="submit"]:hover {
   font-size: 14px;
   margin-top: 15px !important;
   margin-bottom: 0px !important;
-  font-weight: 600;
+  font-weight: bold !important;
 }
 
 .signup-link {
