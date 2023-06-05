@@ -33,7 +33,7 @@ function addTransaction(event, rowIndex = -1) {
   const description = descriptionInput.value;
   const amount = parseFloat(amountInput.value);
   const type = typeInput.value;
-  const date = dateInput.value;
+  const date = dateInput.value.split("-").reverse().join("/");
 
   // Perform validation
   if (!description || isNaN(amount) || !isFinite(amount) || !type || !date) {
@@ -54,8 +54,8 @@ function addTransaction(event, rowIndex = -1) {
   const amountCell = row.insertCell(1);
   const typeCell = row.insertCell(2);
   const dateCell = row.insertCell(3);
-  const deleteCell = row.insertCell(4);
-  const editCell = row.insertCell(5);
+  const editCell = row.insertCell(4);
+  const deleteCell = row.insertCell(5);
 
   descriptionCell.textContent = description;
   amountCell.textContent = amount.toFixed(2);
@@ -77,11 +77,11 @@ function addTransaction(event, rowIndex = -1) {
   editButton.addEventListener("click", editTransaction.bind(null, row));
   editCell.appendChild(editButton);
 
-  if (type === "income") {
-    row.classList.add("income-row");
-  } else if (type === "deduction") {
-    row.classList.add("deduction-row");
-  }
+  // if (transactionList.rows.length === "Income") {
+  //   row.classList.add("odd-row");
+  // } else if (type === "Deduction") {
+  //   row.classList.add("even-row");
+  // }
 
   // Update charts
   updateCharts();
@@ -106,6 +106,8 @@ function deleteTransaction(row,description, amount, type, date) {
 
 // Function to edit a transaction
 function editTransaction(row) {
+  popup.classList.add("show");  // Show popup
+
   const descriptionCell = row.cells[0];
   const amountCell = row.cells[1];
   const typeCell = row.cells[2];
@@ -205,17 +207,17 @@ function updateCharts() {
     // Update daily transaction chart data
     if (dailyTransactionLabels.includes(date)) {
       const index = dailyTransactionLabels.indexOf(date);
-      if (type === "income") {
+      if (type === "Income") {
         dailyIncomeAmounts[index] += amount;
-      } else if (type === "deduction") {
+      } else if (type === "Deduction") {
         dailyDeductionAmounts[index] += amount;
       }
     } else {
       dailyTransactionLabels.push(date);
-      if (type === "income") {
+      if (type === "Income") {
         dailyIncomeAmounts.push(amount);
         dailyDeductionAmounts.push(0);
-      } else if (type === "deduction") {
+      } else if (type === "Deduction") {
         dailyDeductionAmounts.push(amount);
         dailyIncomeAmounts.push(0);
       }
@@ -226,9 +228,9 @@ function updateCharts() {
       const amount = parseFloat(row.cells[1].textContent);
       const type = row.cells[2].textContent;
 
-      if (type === "income") {
+      if (type === "Income") {
         totalIncome += amount;
-      } else if (type === "deduction") {
+      } else if (type === "Deduction") {
         totalDeduction += amount;
       }
     }
@@ -432,13 +434,21 @@ function updateTotalIncome() {
     const amountCell = row.cells[1];
     const typeCell = row.cells[2];
 
-    if (typeCell.textContent === "income") {
+    if (typeCell.textContent === "Income") {
       totalIncome += parseFloat(amountCell.textContent);
     }
   }
 
   const totalIncomeElement = document.getElementById("total-income");
   totalIncomeElement.textContent = "Total Income: " + totalIncome.toFixed(2);
+
+  const totalBalance = document.getElementById("total-balance");
+  const starting_balance = 10000;  //this we have to figure out how to get from the signup page
+  console.log(starting_balance);
+  const cur_balance = starting_balance + totalIncome;
+  console.log(cur_balance);
+  totalBalance.textContent = "Total Balance: " + cur_balance.toFixed(2);
+  console.log(totalBalance.textContent);
 }
 
 // Function to update total deduction
@@ -451,13 +461,19 @@ function updateTotalDeduction() {
     const amountCell = row.cells[1];
     const typeCell = row.cells[2];
 
-    if (typeCell.textContent === "deduction") {
+    if (typeCell.textContent === "Deduction") {
       totalDeduction += parseFloat(amountCell.textContent);
     }
   }
 
   const totalDeductionElement = document.getElementById("total-deduction");
-  totalDeductionElement.textContent = "Total Deduction: " + totalDeduction.toFixed(2);
+  totalDeductionElement.textContent =
+    "Total Deduction: " + totalDeduction.toFixed(2);
+
+  const totalBalance = document.getElementById("total-balance");
+  const starting_balance = 10000; //this we have to figure out how to get from the signup page
+  const cur_balance = starting_balance - totalDeduction;
+  totalBalance.textContent = "Total Balance: " + cur_balance.toFixed(2);
 }
 
 // reference your database

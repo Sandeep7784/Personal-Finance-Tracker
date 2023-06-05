@@ -17,7 +17,7 @@ signupForm.addEventListener("submit", function (event) {
   var name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const username = document.getElementById("username").value;
-  const dob = document.getElementById("dob").value;
+  const cur_balance = document.getElementById("cur-balance").value;
   const password = document.getElementById("password").value;
 
   // Check if passwords match
@@ -46,11 +46,11 @@ signupForm.addEventListener("submit", function (event) {
               email: email,
               username: username,
               name: name,
-              dob: dob,
+              cur_balance: cur_balance,
               password: password,
             });
           console.log("Account created successfully!");
-          console.log(email,username,name,dob)
+          console.log(email,username,name,cur_balance)
           window.location.href = "login.html";
         }
       })
@@ -58,6 +58,9 @@ signupForm.addEventListener("submit", function (event) {
         console.log("Error: " + error.code);
       });
   }
+
+  const totalBalance = document.getElementById("cur-balance");
+  totalBalance.textContent = "Total Balance: " + cur_balance.toFixed(2);
 });
 
 // Add input change event listener

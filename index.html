@@ -18,27 +18,28 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <link rel="icon" href="budget.png" type="image/png" />
+    <link rel="icon" href="./assets/budget.png" type="image/png" />
     <title>Finance Tracking Tool</title>
     <script
       type="module"
       src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"
     ></script>
+    <script type="module" src="signup.js"></script>
     <script type="module" src="config.js"></script>
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="script.js"></script>
   </head>
 
   <body>
     <div class="container">
       <!-- <header>
         <div class="logo-container">
-          <img src="budget.png" alt="Logo" class="logo" />
+          <img src="./assets/budget.png" alt="Logo" class="logo" />
           <h1>Finance Tracking App</h1>
         </div>
       </header> -->
       <header>
         <div class="header-div">
-          <h1>Transactions</h1>
+          <img src="./assets/microsoft.svg" alt="logo" />
           <div id="openPopup" class="add-transaction">
             <h4>Add Transaction</h4>
           </div>
@@ -77,8 +78,8 @@
                   <label for="type">Type:</label>
                   <select id="type" required>
                     <option value="" selected disabled>Select type</option>
-                    <option value="income">Income</option>
-                    <option value="deduction">Deduction</option>
+                    <option value="Income">Income</option>
+                    <option value="Deduction">Deduction</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -106,8 +107,8 @@
                   <th>Amount</th>
                   <th>Type</th>
                   <th>Date</th>
-                  <th>Delete</th>
                   <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -116,6 +117,7 @@
             </table>
           </div>
           <div id="totals-container">
+            <span id="total-balance"></span>
             <span id="total-income">Total Income: 0.0</span>
             <span id="total-deduction">Total Deduction: 0.0</span>
           </div>
