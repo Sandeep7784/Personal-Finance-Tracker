@@ -47,6 +47,10 @@ header {
   justify-content: space-between;
 }
 
+.header-div img{
+  width: 50px;
+}
+
 .header-div h1 {
   font-family: "Roboto", sans-serif;
   font-size: 2rem;
@@ -85,6 +89,7 @@ main {
 
 .right-section {
   flex-basis: 100%;
+  min-height: 100vh;
   /* padding-left: 10px; */
 }
 

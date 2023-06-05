@@ -1,7 +1,7 @@
 import firebase from "./config.js";
 
 // // Check if user is logged in
-if (localStorage.getItem('userid') === null) {
+if (localStorage.getItem("userid") === null) {
   window.location.href = "login.html";
 }
 // // Form submission event listener
@@ -49,7 +49,10 @@ function addTransaction(event, rowIndex = -1) {
 
   // Create or update transaction row
   const transactionList = document.getElementById("transaction-list");
-  const row = rowIndex === -1 ? transactionList.insertRow(1) : transactionList.rows[rowIndex];
+  const row =
+    rowIndex === -1
+      ? transactionList.insertRow(1)
+      : transactionList.rows[rowIndex];
   const descriptionCell = row.insertCell(0);
   const amountCell = row.insertCell(1);
   const typeCell = row.insertCell(2);
@@ -92,7 +95,7 @@ function addTransaction(event, rowIndex = -1) {
 }
 
 // Function to delete a transaction
-function deleteTransaction(row,description, amount, type, date) {
+function deleteTransaction(row, description, amount, type, date) {
   const transactionList = document.getElementById("transaction-list");
   transactionList.deleteRow(row.rowIndex);
 
@@ -106,7 +109,7 @@ function deleteTransaction(row,description, amount, type, date) {
 
 // Function to edit a transaction
 function editTransaction(row) {
-  popup.classList.add("show");  // Show popup
+  popup.classList.add("show"); // Show popup
 
   const descriptionCell = row.cells[0];
   const amountCell = row.cells[1];
@@ -132,7 +135,9 @@ function editTransaction(row) {
   updateCharts();
 
   // Scroll to the top of the form
-  document.getElementById("transaction-form").scrollIntoView({ behavior: "smooth" });
+  document
+    .getElementById("transaction-form")
+    .scrollIntoView({ behavior: "smooth" });
 
   // Update total income and total deduction
   updateTotalIncome();
@@ -159,12 +164,14 @@ function updateCharts() {
   const transactionList = document.getElementById("transaction-list");
   const rows = transactionList.getElementsByTagName("tr");
 
-   // Sort rows based on date in descending order
-   const sortedRows = Array.from(rows).slice(1).sort((a, b) => {
-    const dateA = new Date(a.cells[3].textContent);
-    const dateB = new Date(b.cells[3].textContent);
-    return dateB - dateA;
-  });
+  // Sort rows based on date in descending order
+  const sortedRows = Array.from(rows)
+    .slice(1)
+    .sort((a, b) => {
+      const dateA = new Date(a.cells[3].textContent);
+      const dateB = new Date(b.cells[3].textContent);
+      return dateB - dateA;
+    });
 
   // Clear transaction list
   while (transactionList.rows.length > 1) {
@@ -424,6 +431,7 @@ Array.from(editButtons).forEach((button) => {
   });
 });
 
+const starting_balance = 10000; //this we have to figure out how to get from the signup page
 // Function to update total income
 function updateTotalIncome() {
   const transactionList = document.getElementById("transaction-list");
@@ -443,7 +451,7 @@ function updateTotalIncome() {
   totalIncomeElement.textContent = "Total Income: " + totalIncome.toFixed(2);
 
   const totalBalance = document.getElementById("total-balance");
-  const starting_balance = 10000;  //this we have to figure out how to get from the signup page
+  // const starting_balance = 10000;  //this we have to figure out how to get from the signup page
   console.log(starting_balance);
   const cur_balance = starting_balance + totalIncome;
   console.log(cur_balance);
@@ -471,7 +479,7 @@ function updateTotalDeduction() {
     "Total Deduction: " + totalDeduction.toFixed(2);
 
   const totalBalance = document.getElementById("total-balance");
-  const starting_balance = 10000; //this we have to figure out how to get from the signup page
+  // const starting_balance = 10000; //this we have to figure out how to get from the signup page
   const cur_balance = starting_balance - totalDeduction;
   totalBalance.textContent = "Total Balance: " + cur_balance.toFixed(2);
 }
@@ -497,12 +505,11 @@ function submitForm(event) {
 
   event.preventDefault();
 
-
   var description = document.getElementById("description").value;
   var amount = document.getElementById("amount").value;
   var type = document.getElementById("type").value;
   var date = document.getElementById("date").value;
-  
+
   console.log(description, amount, type, date);
 
   // Check if the amount is a valid number
@@ -540,7 +547,7 @@ const getTransaction = () => {
       }
     });
   });
-}
+};
 getTransaction();
 
 const getUserDetails = () => {
@@ -554,5 +561,5 @@ const getUserDetails = () => {
       }
     });
   });
-}
+};
 getUserDetails();
